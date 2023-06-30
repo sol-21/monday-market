@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Home</title>
+    <title>Monday Market</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -419,59 +419,7 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-            var products = @json($productsAll);
-
-
-            $('#search-input').on('input', function() {
-                var searchTerm = $(this).val();
-                if (searchTerm.length > 0) {
-                    var results = performSearch(searchTerm);
-                    displayResults(results);
-                } else {
-                    $('#search-results').empty();
-                    $('#search-results').hide();
-                }
-            });
-
-            $(document).on('click', '.result-item', function() {
-                var selectedResult = $(this).text();
-                filterProducts(selectedResult);
-            });
-
-            function performSearch(searchTerm) {
-                return products.filter(function(product) {
-                    return product.name.toLowerCase().includes(searchTerm.toLowerCase());
-                });
-            }
-
-            function displayResults(results) {
-                var $searchResults = $('#search-results');
-                $searchResults.empty();
-
-                if (results.length > 0) {
-                    results.forEach(function(product) {
-                        var $resultItem = $('<div>').addClass('result-item');
-                        var $resultLink = $('<a>').attr('href', '/products/' + product.id).text(
-                            product.name);
-                        $resultItem.append($resultLink);
-                        $searchResults.append($resultItem);
-                    });
-
-                    $searchResults.show();
-                } else {
-                    $searchResults.hide();
-                }
-            }
-
-            function filterProducts(selectedResult) {
-
-                console.log('Filter products based on:', selectedResult);
-
-            }
-        });
-    </script>
+    
     <!--===============================================================================================-->
     <script src="{{ asset('js/main.js') }}"></script>
 

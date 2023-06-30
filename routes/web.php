@@ -30,7 +30,7 @@ Auth::routes();
 Route::middleware(['auth', 'prevent-back-history'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/allproducts', [ProductController::class, 'adminIndex'])->name('products.adminindex');
+    Route::get('/adminsearch', [ProductController::class, 'adminSearch'])->name('products.adminsearch');
     Route::get('/product/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/product', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');

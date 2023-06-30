@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <title>Monday Market</title>
     <!-- loader-->
     <link href="{{ asset('admin/css/pace.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('admin/js/pace.min.js') }}"></script>
@@ -39,7 +39,7 @@
             <div class="brand-logo">
                 <a href="index.html">
                     <img src="{{ asset('admin/images/logo-icon.png') }}" class="logo-icon" alt="logo icon" />
-                    <h5 class="logo-text">Dashtreme Admin</h5>
+                    <h5 class="logo-text">Monday Market</h5>
                 </a>
             </div>
             <ul class="sidebar-menu do-nicescrol">
@@ -56,14 +56,7 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('products.adminindex') }}">
-                        <i class="zmdi zmdi-grid"></i> <span>Products</span>
-                    </a>
-                </li>
-
-
-
+                
                 <li>
                     <a href="{{ route('announcement.create') }}">
                         <i class="zmdi zmdi-face"></i> <span>Send Notification</span>
@@ -71,13 +64,6 @@
                 </li>
 
                 
-
-
-
-
-
-
-
             </ul>
         </div>
         <!--End sidebar-wrapper-->
@@ -92,9 +78,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <form class="search-bar">
-                            <input type="text" class="form-control" placeholder="Enter keywords" />
-                            <a href="javascript:void();"><i class="icon-magnifier"></i></a>
+
+                        <form class="search-bar d-flex justify-content-between align-items-center" action="{{route('products.adminsearch') }}" method='GET'>
+                            @csrf
+                            <input type="search" name='search' class="form-control" placeholder="Enter keywords" />
+                           <button class="btn "  type='submit'><i class="icon-magnifier text-white"></i></button>
                         </form>
                     </li>
                 </ul>
@@ -137,9 +125,6 @@
                                 </form>
                             </li>
 
-
-
-
                         </ul>
                     </li>
                 </ul>
@@ -158,6 +143,12 @@
                     <div class="alert alert-success alert-dismissable">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">X</a>
                         <strong>{{ session('success') }}</strong>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-warning alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">X</a>
+                        <strong>{{ session('error') }}</strong>
                     </div>
                 @endif
 

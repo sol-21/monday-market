@@ -96,8 +96,7 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->color }}</td>
-                                        <td><img width="100" height="100" src={{ $product->image }}
-                                                alt={{ $product->name }}></td>
+                                        <td><img src="{{ asset($product->image) }}" alt="IMG-PRODUCT" width='100' height='100'></td>
                                         <td>{{ $product->size }}</td>
                                         <td>{{ $product->type }}</td>
                                         <td>
@@ -116,10 +115,7 @@
                                         <td>
                                             <button type="button" class="btn btn-danger" data-toggle="modal"
                                                 data-target="#confirmDeleteModal">Delete</button>
-                                        </td>
-
-                                    </tr>
-                                    {{-- delete conformation modal --}}
+                                            {{-- delete conformation modal --}}
                                     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
                                         aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -148,6 +144,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                        </td>
+
+                                    </tr>
+                                    
                                 @endforeach
                                 <div class="paginating">
                                     {!! $productsPaginate->withQueryString()->links('pagination::bootstrap-5') !!}
@@ -155,9 +155,6 @@
                             </tbody>
 
                         </table>
-
-
-
 
 
 

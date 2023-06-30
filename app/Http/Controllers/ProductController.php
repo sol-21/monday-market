@@ -12,20 +12,44 @@ class ProductController extends Controller
         $products = Product::latest()->paginate(3);
         return view('guest_pages.product', compact('products'));
     }
-    public function adminIndex()
-    {
-        $products = Product::latest()->paginate(3);
-        return view('admin.display_products', compact('products'));
-    }
+    // public function adminIndex()
+    // {
+    //     $products = Product::latest()->paginate(3);
+    //     return view('admin.display_products', compact('products'));
+    // }
 
     public function searchProduct(Request $request)
     {
-        if ($request->search) {
-            $searchProducts = Product::where('name', 'LIKE', '%' . $request->search . '%')->latest()->paginate(3);
-            return view('guest_pages.search_products', compact('searchProducts'));
-        } else {
-            return redirect()->back()->with('error', 'there is no result');
+        $request->validate([
+            'search' => 'required',
+        ]);
+
+        $searchQuery = $request->search;
+
+        $searchProducts = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->latest()->paginate(3);
+
+        if ($searchProducts->isEmpty()) {
+            return redirect()->back()->with('error', 'No related results found.');
         }
+
+        return view('guest_pages.search_products', compact('searchProducts'));
+    }
+
+    public function adminSearch(Request $request)
+    {
+        $request->validate([
+            'search' => 'required',
+        ]);
+
+        $searchQuery = $request->search;
+
+        $searchProducts = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->latest()->paginate(3);
+
+        if ($searchProducts->isEmpty()) {
+            return redirect()->back()->with('error', 'No related results found.');
+        }
+
+        return view('admin.display_products', compact('searchProducts'));
 
     }
 
@@ -43,13 +67,16 @@ class ProductController extends Controller
             'color' => 'required',
             'price' => 'required|numeric',
             'description' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20000',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20000|required',
             'size' => 'nullable',
 
         ]);
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('products'), $imageName);
-        $validatedProduct['image'] = 'products/' . $imageName;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('products'), $imageName);
+                $validatedProduct['image'] = 'products/' . $imageName;
+        }
+        
         Product::create($validatedProduct);
         return redirect()->back()->with('success', 'Product  Added successfully!');
     }
@@ -81,9 +108,12 @@ class ProductController extends Controller
             'size' => 'nullable',
 
         ]);
+    if ($request->hasFile('image')) {
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('products'), $imageName);
         $validatedProduct['image'] = 'products/' . $imageName;
+    }
+        
         $product->update($validatedProduct);
         return redirect()->back()->with('success', 'Product  Updated successfully!');
     }
@@ -92,7 +122,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $product->delete($product);
-        return redirect()->back()->with('success', 'Product  deleted successfully!');
+        return redirect()->back()->with('success', $product->id .   'deleted successfully!');
     }
 
 }

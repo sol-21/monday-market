@@ -4,6 +4,13 @@
     
     <!-- Product -->
     <div class="bg0 p-t-23 p-b-140">
+@if (session('error'))
+                    <div class="alert alert-warning alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">X</a>
+                        <strong>{{ session('error') }}</strong>
+                    </div>
+                @endif
+
         <div class="container">
 <div class="p-b-10">
 				<h3 class="ltext-103 cl5">
@@ -50,7 +57,7 @@
                                 </a>
 
 
-                                <a href="#"
+                                <a href="{{ route('products.show', ['id' => $product->id]) }}"
                                     class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                     Quick Views
                                 </a>

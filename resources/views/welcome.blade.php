@@ -5,7 +5,7 @@
     <section class="section-slide">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url({{ asset('images/jacket.jpg)') }};">
+                <div class="item-slick1" style="background-image: url('{{ asset('images/jacket.jpg') }}');">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -29,8 +29,8 @@
                         </div>
                     </div>
                 </div>
+                <div class="item-slick1" style="background-image: url('{{ asset('images/jeans.jpg') }}');">
 
-                <div class="item-slick1" style="background-image: url({{ asset('images/jeans.jpg)') }};">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url({{ asset('images/shirtss.jpg') }});">
+                <div class="item-slick1" style="background-image: url('{{ asset('images/shirtss.jpg') }}');">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
@@ -211,7 +211,7 @@
                                 <img src="{{ asset($product->image) }}" alt="IMG-PRODUCT">
 
                                 <a href="{{ route('products.show', ['id' => $product->id]) }}"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
                                      View Details
                                 </a>
                             </div>

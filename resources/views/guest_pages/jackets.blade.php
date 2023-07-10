@@ -6,6 +6,7 @@
 
     <!-- Product -->
     <div class="bg0 p-t-23 p-b-140">
+
         <div class="container">
 <div class="p-b-10">
 				<h3 class="ltext-103 cl5">
@@ -43,7 +44,7 @@
 
             <div class="row isotope-grid">
                 @foreach ($products as $product)
-                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{}}">
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
@@ -52,7 +53,7 @@
                                 </a>
 
 
-                                <a href="#"
+                                <a href="{{ route('products.show', ['id' => $product->id]) }}"
                                     class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                     Quick Views
                                 </a>
